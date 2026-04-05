@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<body>
+<!-- 🔐 LOCK SCREEN -->
+<div id="lock-screen">
+  <h2>Menunggu Hari Spesial 💫</h2>
+
+  <div id="countdown-container">
+    <div id="cd-display" class="countdown-grid">
+      <div class="cd-box"><span id="cd-days" class="cd-num">00</span><span class="cd-label">Hari</span></div>
+      <div class="cd-box"><span id="cd-hours" class="cd-num">00</span><span class="cd-label">Jam</span></div>
+      <div class="cd-box"><span id="cd-mins" class="cd-num">00</span><span class="cd-label">Menit</span></div>
+      <div class="cd-box"><span id="cd-secs" class="cd-num">00</span><span class="cd-label">Detik</span></div>
+    </div>
+
+    <div id="cd-done" class="cd-done hidden">🎉 Waktunya tiba! 🎉</div>
+  </div>
+
+  <!-- 🔐 PASSWORD -->
+  <div class="password-box">
+    <input type="password" id="password-input" placeholder="Masukkan password..." />
+    <button onclick="checkPassword()">Masuk</button>
+  </div>
+</div>
+
+
+<!-- 🌸 MAIN CONTENT -->
+<div id="main-content" class="hidden">
+  <!-- SEMUA isi website kamu pindahkan ke sini -->
+</div>
+
+<!-- Theme switcher -->
+<div class="theme-bar">
+  <span class="theme-label">TEMA</span>
+  <div class="theme-dot t-pink  active" onclick="setTheme('pink')"  title="Pink"></div>
+  <div class="theme-dot t-blue"         onclick="setTheme('blue')"  title="Biru"></div>
+  <div class="theme-dot t-green"        onclick="setTheme('green')" title="Hijau"></div>
+  <div class="theme-dot t-purple"       onclick="setTheme('purple')" title="Ungu"></div>
+  <div class="theme-dot t-gold"         onclick="setTheme('gold')"  title="Emas"></div>
+</div>
+
+<!-- Fireworks canvas -->
+<canvas class="fw-canvas" id="fw-canvas"></canvas>
+<button class="fireworks-btn" onclick="launchFireworks()">🎆 Kembang Api!</button>
+
+<!-- Background -->
+<div class="bg-scene">
+  <div class="stars" id="stars"></div>
+  <div class="glow-orb orb1"></div>
+  <div class="glow-orb orb2"></div>
+  <div class="glow-orb orb3"></div>
+</div>
+
+<!-- Confetti -->
+<div class="confetti-container" id="confetti"></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <span class="cake-emoji">🎂</span>
+  <p class="label">Hari Spesial</p>
+  <h1>Happy Bithday My Love</h1>
+  <div class="name-display" id="display-name">Louisa 🩵</div>
+  <p class="hero-message" id="display-msg">
+    Di hari yang indah ini, semua cinta dan doa terbaik buat kamu. Semoga setiap impianmu menjadi kenyataan, dan kebahagiaanmu tak pernah pudar. 🌹
+  </p>
+  <p>
+
+  </p>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ── AGE ── -->
+<section class="age-section">
+  <p class="label">Ulang Tahun Ke</p>
+  <div class="age-circle">
+    <div class="age-number" id="display-age">19</div>
+    <div class="age-label">Tahun</div>
+  </div>
+  <p style="color: var(--lavender); font-style: italic; font-family: 'Playfair Display', serif;">
+    Umur Baru, Semangat Baru ✨
+  </p>
+</section>
+
+<!-- ── WISH CARDS ── -->
+<section class="section">
+  <h2 class="section-title">Harapan & Doa</h2>
+  <div class="wishes-grid">
+    <div class="wish-card" style="animation-delay:0.1s">
+      <span class="wish-icon">🌟</span>
+      <p class="wish-title">Cahaya Baru</p>
+      <p class="wish-text">Semoga setiap hari barumu bersinar lebih terang dari sebelumnya dan penuh kemungkinan.</p>
+    </div>
+    <div class="wish-card" style="animation-delay:0.2s">
+      <span class="wish-icon">💫</span>
+      <p class="wish-title">Mimpi yang Nyata</p>
+      <p class="wish-text">Semua impian yang kamu simpan dalam hati — semoga satu per satu menjadi kenyataan.</p>
+    </div>
+    <div class="wish-card" style="animation-delay:0.3s">
+      <span class="wish-icon">🌸</span>
+      <p class="wish-title">Kebahagiaan</p>
+      <p class="wish-text">Kebahagiaan yang datang dari dalam, yang tidak bergantung pada siapapun kecuali dirimu sendiri.</p>
+    </div>
+    <div class="wish-card" style="animation-delay:0.4s">
+      <span class="wish-icon">🔥</span>
+      <p class="wish-title">Semangat</p>
+      <p class="wish-text">Semoga api semangatmu selalu menyala, bahkan di saat dunia terasa dingin.</p>
+    </div>
+    <div class="wish-card" style="animation-delay:0.5s">
+      <span class="wish-icon">💝</span>
+      <p class="wish-title">Dicintai Seutuhnya</p>
+      <p class="wish-text">Semoga kamu selalu dikelilingi oleh orang-orang yang mencintaimu apa adanya.</p>
+    </div>
+    <div class="wish-card" style="animation-delay:0.6s">
+      <span class="wish-icon">🌙</span>
+      <p class="wish-title">Kedamaian Malam</p>
+      <p class="wish-text">Semoga tidur kamu nyenyak, mimpimu indah, dan setiap pagi menyambutmu dengan lembut, dan yang terpenting semoga overthiking kamu berkurang bahkan hilang.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── LANY SONG SECTION ── -->
+<section class="song-section">
+  <div class="song-wrapper">
+    <p class="label">Lagu Spesial</p>
+    <h2 class="section-title" style="margin-bottom:0.5rem;">Buat Kamu Si LANYHOLIC</h2>
+    <div class="song-player">
+      <div class="vinyl" id="vinyl">
+        <div class="vinyl-center" id="play-toggle" onclick="togglePlay()" title="Play / Pause">
+          <span id="play-icon">▶</span>
+        </div>
+      </div>
+      <div class="song-info">
+        <div class="song-name" id="song-name-display">ILYSB</div>
+        <div class="song-artist">LANY</div>
+      </div>
+      <button class="play-btn" onclick="togglePlay()" id="play-btn-text">▶ Putar Lagu</button>
+    </div>
+
+    <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 1rem; line-height: 1.6;">
+      * Enjoy. 🎵
+    </p>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section class="message-section">
+  <h2 class="section-title">Wish Buat Kamu</h2>
+  <div class="message-box">
+    <p class="quote-text" id="display-quote">
+      "Happy Birthday wanita kesayangan aku. Semoga di usia kamu yang sekarang, semua hal baik selalu datang ke hidup kamu. Aku bersyukur banget punya kamu, orang yang selalu bikin hari-hariku lebih berarti. Semoga semua impian kamu satu per satu tercapai, dan aku harap aku bisa terus ada di samping kamu, nemenin setiap langkahmu. Terima kasih udah jadi pasangan yang sabar, perhatian, dan selalu ada buat aku. Aku sayang banget sama kamu🤍
+Happy birthday, Mylove 🎂✨"
+    </p>
+    <p class="quote-author" id="display-sender">— Febri, Your Lovely BF 💕</p>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery-section">
+  <h2 class="section-title">Galeri Foto Orang Paling Spesial 🩵</h2>
+  <div class="gallery-grid" id="gallery-grid">
+    <!-- Slots will be generated by JS -->
+  </div>
+</section>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lightbox-caption" id="lb-caption"></div>
+  <div class="lightbox-nav">
+    <button class="lb-btn" onclick="lbNav(-1); event.stopPropagation()">‹</button>
+    <span class="lb-counter" id="lb-counter">1 / 1</span>
+    <button class="lb-btn" onclick="lbNav(1); event.stopPropagation()">›</button>
+  </div>
+</div>
+
+<!-- ── ADD PHOTO MODAL ── -->
+<div class="add-photo-modal" id="add-photo-modal">
+  <div class="add-photo-box">
+    <h3>Tambah Foto Kenangan 📸</h3>
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" accept="image/*" onchange="previewFile(event)">
+      <span class="drop-icon">🖼️</span>
+      <span>Klik atau seret foto ke sini</span>
+    </div>
+    <img class="preview-thumb" id="preview-thumb" src="" alt="Preview">
+    <input class="caption-input" id="caption-input" type="text" placeholder="Tulis keterangan foto... (opsional)">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeAddModal()">Batal</button>
+      <button class="btn-add" onclick="confirmAddPhoto()">Tambahkan ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CANDLE SECTION ── -->
+<section class="candle-section">
+  <p class="label">Make A Wish</p>
+  <h2 class="section-title">Tiup Lilinnya!</h2>
+  <div class="cake-scene">
+    <svg class="cake-svg" width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cake base -->
+      <rect x="40" y="160" width="260" height="80" rx="12" fill="#c04070" opacity="0.9"/>
+      <rect x="40" y="160" width="260" height="18" rx="8" fill="#e06090"/>
+      <!-- Frosting drips -->
+      <path d="M80 160 Q90 148 100 160 Q110 148 120 160 Q130 148 140 160 Q150 148 160 160 Q170 148 180 160 Q190 148 200 160 Q210 148 220 160 Q230 148 240 160 Q250 148 260 160" fill="none" stroke="#fce8ee" stroke-width="10" stroke-linecap="round"/>
+      <!-- Middle layer -->
+      <rect x="60" y="108" width="220" height="60" rx="10" fill="#d4507a" opacity="0.9"/>
+      <rect x="60" y="108" width="220" height="14" rx="7" fill="#e87aaa"/>
+      <!-- Top layer -->
+      <rect x="90" y="68" width="160" height="46" rx="10" fill="#e06090" opacity="0.9"/>
+      <rect x="90" y="68" width="160" height="13" rx="6" fill="#f094bc"/>
+      <!-- Stars deco -->
+      <text x="80" y="195" font-size="14" fill="rgba(255,255,255,0.25)">✦</text>
+      <text x="240" y="192" font-size="12" fill="rgba(255,255,255,0.2)">✦</text>
+      <text x="155" y="198" font-size="10" fill="rgba(255,255,255,0.18)">✦</text>
+      <!-- Candles -->
+      <!-- Candle 1 -->
+      <g class="candle-group" id="c1" onclick="blowCandle(1)">
+        <rect x="121" y="44" width="10" height="28" rx="3" fill="#f2a7b8"/>
+        <rect x="121" y="44" width="10" height="10" rx="2" fill="#fce8ee" opacity="0.6"/>
+        <ellipse id="smoke1" class="smoke" cx="126" cy="36" rx="4" ry="5" fill="rgba(200,200,200,0.3)"/>
+        <g id="flame1" class="flame">
+          <ellipse cx="126" cy="34" rx="5" ry="8" fill="#ffcc44" opacity="0.9"/>
+          <ellipse cx="126" cy="36" rx="3" ry="5" fill="#ff8822" opacity="0.8"/>
+          <ellipse cx="126" cy="38" rx="2" ry="3" fill="#ff4400" opacity="0.6"/>
+        </g>
+      </g>
+      <!-- Candle 2 -->
+      <g class="candle-group" id="c2" onclick="blowCandle(2)">
+        <rect x="145" y="44" width="10" height="28" rx="3" fill="#b8a5d4"/>
+        <rect x="145" y="44" width="10" height="10" rx="2" fill="#e8e0f8" opacity="0.6"/>
+        <ellipse id="smoke2" class="smoke" cx="150" cy="36" rx="4" ry="5" fill="rgba(200,200,200,0.3)"/>
+        <g id="flame2" class="flame">
+          <ellipse cx="150" cy="34" rx="5" ry="8" fill="#ffcc44" opacity="0.9"/>
+          <ellipse cx="150" cy="36" rx="3" ry="5" fill="#ff8822" opacity="0.8"/>
+          <ellipse cx="150" cy="38" rx="2" ry="3" fill="#ff4400" opacity="0.6"/>
+        </g>
+      </g>
+      <!-- Candle 3 -->
+      <g class="candle-group" id="c3" onclick="blowCandle(3)">
+        <rect x="169" y="44" width="10" height="28" rx="3" fill="#e8c87a"/>
+        <rect x="169" y="44" width="10" height="10" rx="2" fill="#fff8e0" opacity="0.6"/>
+        <ellipse id="smoke3" class="smoke" cx="174" cy="36" rx="4" ry="5" fill="rgba(200,200,200,0.3)"/>
+        <g id="flame3" class="flame">
+          <ellipse cx="174" cy="34" rx="5" ry="8" fill="#ffcc44" opacity="0.9"/>
+          <ellipse cx="174" cy="36" rx="3" ry="5" fill="#ff8822" opacity="0.8"/>
+          <ellipse cx="174" cy="38" rx="2" ry="3" fill="#ff4400" opacity="0.6"/>
+        </g>
+      </g>
+      <!-- Candle 4 -->
+      <g class="candle-group" id="c4" onclick="blowCandle(4)">
+        <rect x="193" y="44" width="10" height="28" rx="3" fill="#f2a7b8"/>
+        <rect x="193" y="44" width="10" height="10" rx="2" fill="#fce8ee" opacity="0.6"/>
+        <ellipse id="smoke4" class="smoke" cx="198" cy="36" rx="4" ry="5" fill="rgba(200,200,200,0.3)"/>
+        <g id="flame4" class="flame">
+          <ellipse cx="198" cy="34" rx="5" ry="8" fill="#ffcc44" opacity="0.9"/>
+          <ellipse cx="198" cy="36" rx="3" ry="5" fill="#ff8822" opacity="0.8"/>
+          <ellipse cx="198" cy="38" rx="2" ry="3" fill="#ff4400" opacity="0.6"/>
+        </g>
+      </g>
+      <!-- Candle 5 -->
+      <g class="candle-group" id="c5" onclick="blowCandle(5)">
+        <rect x="217" y="44" width="10" height="28" rx="3" fill="#b8a5d4"/>
+        <rect x="217" y="44" width="10" height="10" rx="2" fill="#e8e0f8" opacity="0.6"/>
+        <ellipse id="smoke5" class="smoke" cx="222" cy="36" rx="4" ry="5" fill="rgba(200,200,200,0.3)"/>
+        <g id="flame5" class="flame">
+          <ellipse cx="222" cy="34" rx="5" ry="8" fill="#ffcc44" opacity="0.9"/>
+          <ellipse cx="222" cy="36" rx="3" ry="5" fill="#ff8822" opacity="0.8"/>
+          <ellipse cx="222" cy="38" rx="2" ry="3" fill="#ff4400" opacity="0.6"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <p class="candle-hint" id="candle-hint">👆 Klik api di lilin buat niupnya</p>
+  <div class="wish-popup" id="wish-popup">🌟 Permohonanmu telah didengar! Semoga terkabul! 🌟</div>
+  <button class="relight-btn" id="relight-btn" onclick="relightCandles()">🕯️ Nyalakan Lagi</button>
+</section>
+
+<!-- ── GREETING CARD ── -->
+<section class="card-section">
+  <p class="label">Kartu Ucapan</p>
+  <h2 class="section-title">Download Kartu Spesialmu</h2>
+  <div class="card-style-row">
+    <button class="card-style-btn active" onclick="setCardStyle('classic')">Classic</button>
+    <button class="card-style-btn" onclick="setCardStyle('minimal')">Minimal</button>
+    <button class="card-style-btn" onclick="setCardStyle('bold')">Bold</button>
+  </div>
+
+  <div class="card-preview">
+    <div id="greeting-card">
+      <div class="card-bg-pattern"></div>
+      <div class="card-border-deco"></div>
+      <div class="card-inner">
+        <div class="card-emoji-row" id="card-emojis">🌸 🎂 🌸</div>
+        <div class="card-title">Selamat Ulang Tahun</div>
+        <div class="card-name" id="card-name">Namamu</div>
+        <div class="card-msg" id="card-msg">Di hari yang indah ini, semua cinta dan doa terbaik untukmu. Semoga setiap impianmu menjadi kenyataan.</div>
+        <div class="card-from" id="card-from">— Dengan cinta 💕</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-controls">
+    <button class="card-btn card-btn-dl" onclick="downloadCard()">⬇ Download PNG</button>
+    <button class="card-btn card-btn-print" onclick="printCard()">🖨️ Print Kartu</button>
+  </div>
+</section>
+
+<!-- ── COUNTDOWN ── -->
+<section class="countdown-section">
+  <p class="label">Menghitung Momen</p>
+  <h2 class="section-title">Countdown Ulang Tahun</h2>
+  <div id="cd-display" class="countdown-grid">
+    <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Hari</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Jam</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Menit</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Detik</span></div>
+  </div>
+  <div id="cd-done" class="cd-done hidden">🎉 Selamat Ulang Tahun! Hari ini adalah harimu! 🎉</div>
+  <p style="color:var(--text-muted);font-size:0.85rem;margin-top:1rem;">
+  🎉 Menuju hari spesialmu — 6 April 2026 🎉
+</p>
+</section>
+
+
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-heart">💖</div>
+  <p class="footer-text">Made with love for you special day</p>
+  <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; letter-spacing: 1px;">
+    ✨ Happy Birthday ✨
+  </p>
+</footer>
+
+<audio id="audio" loop>
+  <source src="LANY - ILYSB.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>
