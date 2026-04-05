@@ -424,7 +424,7 @@ function checkPassword() {
     ctx.fillText('Selamat Ulang Tahun', cx, h*0.42);
     ctx.fillStyle = '#f2a7b8'; ctx.font = 'italic '+Math.round(h*0.13)+'px serif';
     ctx.fillText(document.getElementById('card-name').textContent, cx, h*0.58);
-    ctx.fillStyle = '#b8a5d4'; ctx.font = Math.round(h*0.065)+'px sans-serif';
+    ctx.fillStyle = '#b8a5d4'; ctx.font = Math.round(h*0.05)+'px sans-serif';
     const msgLines = wrapText(ctx, document.getElementById('card-msg').textContent, w-80);
     msgLines.forEach((line,i) => ctx.fillText(line, cx, h*0.71 + i*(Math.round(h*0.07))));
     ctx.fillStyle = '#9b7faa'; ctx.font = Math.round(h*0.055)+'px sans-serif';
@@ -443,7 +443,7 @@ function checkPassword() {
       else line = test;
     });
     if (line) lines.push(line);
-    return lines.slice(0,3);
+    return lines;
   }
 
   function printCard() {
