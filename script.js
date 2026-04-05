@@ -426,8 +426,7 @@ function checkPassword() {
     ctx.fillText(document.getElementById('card-name').textContent, cx, h*0.58);
     ctx.fillStyle = '#b8a5d4'; ctx.font = Math.round(h*0.05)+'px sans-serif';
     const msgLines = wrapText(ctx, document.getElementById('card-msg').textContent, w-80);
-    msgLines.forEach((line,i) => ctx.fillText(line, cx, h*0.71 + i*(Math.round(h*0.07))));
-    ctx.fillStyle = '#9b7faa'; ctx.font = Math.round(h*0.055)+'px sans-serif';
+    msgLines.forEach((line,i) => ctx.fillText(line, cx, h*0.71 + i*(Math.round(h*0.07))));    ctx.fillStyle = '#9b7faa'; ctx.font = Math.round(h*0.055)+'px sans-serif';
     ctx.fillText(document.getElementById('card-from').textContent, cx, h*0.91);
     const link = document.createElement('a');
     link.download = 'kartu-ulang-tahun.png';
