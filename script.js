@@ -3,6 +3,14 @@ let analyser;
 let micStream;
 let dataArray;
 
+function enterSite() {
+  document.getElementById('opening-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+
+  // jalankan efek
+  launchFireworks();
+}
+
 async function initMic() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
