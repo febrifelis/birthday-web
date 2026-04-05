@@ -560,3 +560,9 @@ function checkPassword() {
   document.querySelectorAll('.edit-panel input').forEach(inp => {
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') applyChanges(); });
   });
+
+  const volumeControl = document.getElementById('volume-control');
+
+  volumeControl.addEventListener('input', function() {
+    audio.volume = this.value;
+  });
